@@ -1,47 +1,36 @@
 let container = document.querySelector(".container");
 let displayElement = document.querySelector(".display")
 
-let numberOne = "";
-let numberTwo = "";
+let firstNumber = "";
+let secondNumber = "";
 
-let isNumberOne = true;
-let isAdding = false;
-let isMultipying = false;
-let isDividing = false;
-let isSubtracting = false;
+let isFirstNumber = true;
+let isCalculating = false;
 
-container.addEventListener("click", (event) => {
-    if (event.target.className === "number" || event.target.className === "number zero") {
-        if (isNumberOne) {
-            numberOne += event.target.textContent;
-            displayElement.textContent = numberOne;
-            console.log(numberOne)
+
+
+
+
+container.addEventListener("click", (e) => {
+    if (e.target.className.includes("number")) {
+        if (isFirstNumber === true) {
+            firstNumber += e.target.textContent;
+            displayElement.textContent = firstNumber;
         }
         else {
-            numberTwo += event.target.textContent;
-            displayElement.textContent = numberTwo;
-            console.log(numberTwo)
+            secondNumber += e.target.textContent;
+            displayElement.textContent = secondNumber;
         }
-      
+        
     }
-    if (event.target.className.includes("operation") && !event.target.className.includes("equals") ) {
-        isNumberOne = false;
-        if (event.target.className.includes("add"))
+    if (e.target.className.includes("operation")) {
+        if (isCalculating === true) {
+            calculate(e.target.className)
+        }
+        isFirstNumber = false;
     }
 })
 
-function add() {
-    return +numberOne + numberTwo;
-}
-
-function divide() {
-    return +numberOne / numberTwo;
-}
-
-function multiply() {
-    return +numberOne * numberTwo;
-}
-
-function subtract() {
-    return +numberOne / numberTwo;
+function calculate() {
+    
 }
