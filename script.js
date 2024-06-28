@@ -7,11 +7,13 @@ let percentageElement = document.querySelector(".percentage");
 
 let firstNumber = "";
 let secondNumber = "";
+let tempSecondNumber = "";
 
 let isFirstNumber = true;
 let isCalculating = false;
 
 let operator = "";
+let equalsAgain = false;
 
 clearElement.addEventListener("click", (e) => {
     firstNumber = "";
@@ -57,13 +59,25 @@ container.addEventListener("click", (e) => {
         } 
         operator = e.target.className.split(" ")[1];
         isCalculating = true;
+        equalsAgain = false;
     }
     if (e.target.className.includes("equals")) {
-        if (isCalculating) {
+        if (equalsAgain) {
+            firstNumber = displayElement.textContent;
+            secondNumber = tempSecondNumber;
             displayElement.textContent = calculate(operator);
             firstNumber = displayElement.textContent;
+            secondNumber = "";
+            isCalculating = false;
+            equalsAgain = true;
+        }
+        if (isCalculating || !equalsAgain) {
+            displayElement.textContent = calculate(operator);
+            firstNumber = displayElement.textContent;
+            tempSecondNumber = secondNumber;
             secondNumber ="";
             isCalculating = false;
+            equalsAgain = true;
         }   
     }
    
