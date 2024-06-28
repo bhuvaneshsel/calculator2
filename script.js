@@ -3,7 +3,7 @@ let displayElement = document.querySelector(".display")
 let clearElement = document.querySelector(".AC");
 let percentageElement = document.querySelector(".percentage");
 let negationElement = document.querySelector(".negation");
-
+let decimalElement = document.querySelector(".decimal");
 
 
 let firstNumber = "";
@@ -15,6 +15,19 @@ let isCalculating = false;
 
 let operator = "";
 let equalsAgain = false;
+
+decimalElement.addEventListener("click", (e) => {
+    if (!displayElement.textContent.includes(".")) {
+        if (!isCalculating) {
+            firstNumber = firstNumber + ".";
+            displayElement.textContent = firstNumber;
+        }
+        else {
+            secondNumber = secondNumber + ".";
+            displayElement.textContent = secondNumber;
+        } 
+    }
+})
 
 clearElement.addEventListener("click", (e) => {
     firstNumber = "";
