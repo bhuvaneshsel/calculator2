@@ -9,14 +9,15 @@ let decimalElement = document.querySelector(".decimal");
 let firstNumber = "";
 let secondNumber = "";
 let tempSecondNumber = "";
+let operator = "";
 
 let isFirstNumber = true;
-let isCalculating = false;
 
-let operator = "";
 let equalsAgain = false;
 
+let isCalculating = false;
 let calculated = false;
+
 
 decimalElement.addEventListener("click", (e) => {
     if (!displayElement.textContent.includes(".")) {
@@ -30,21 +31,6 @@ decimalElement.addEventListener("click", (e) => {
         } 
     }
 })
-
-
-function reset() {
-    firstNumber = "";
-    secondNumber = "";
-
-    isFirstNumber = true;
-    isCalculating = false;
-
-    operator = "";
-    displayElement.textContent ="";
-    equalsAgain = false;
-    calculated = false;
-
-}
 
 clearElement.addEventListener("click", (e) => {
    reset()
@@ -75,54 +61,81 @@ negationElement.addEventListener("click", () => {
 
 container.addEventListener("click", (e) => {
     if (e.target.className.includes("number")) {
-        if (calculated) {
-            reset();
-        }
-        if (!isCalculating) {
-            firstNumber += e.target.textContent;
-            displayElement.textContent = firstNumber;
-        }
-        else {
-            secondNumber += e.target.textContent;
-            displayElement.textContent = secondNumber;
-        }
+       pressNumber(e);
     }
     if (e.target.className.includes("operation") && !e.target.className.includes("equals")) {
-        if (isCalculating) {
-            displayElement.textContent = calculate(operator);
-            firstNumber = displayElement.textContent;
-            secondNumber ="";
-            isCalculating = false;
-            operator = e.target.className.split(" ")[1];
-        } 
-        operator = e.target.className.split(" ")[1];
-        isCalculating = true;
-        equalsAgain = false;
-        calculated = false;
+        pressOperator(e);
     }
     if (e.target.className.includes("equals")) {
-        if (equalsAgain) {
-            firstNumber = displayElement.textContent;
-            secondNumber = tempSecondNumber;
-            displayElement.textContent = calculate(operator);
-            firstNumber = displayElement.textContent;
-            secondNumber = "";
-            isCalculating = false;
-            equalsAgain = true;
-            calculated = true;
-        }
-        if (isCalculating) {
-            displayElement.textContent = calculate(operator);
-            firstNumber = displayElement.textContent;
-            tempSecondNumber = secondNumber;
-            secondNumber ="";
-            isCalculating = false;
-            equalsAgain = true;
-            calculated = true;
-        }   
+        pressEquals(e);
     }
    
 })
+
+function pressEquals(e) {
+    if (equalsAgain) {
+        firstNumber = displayElement.textContent;
+        secondNumber = tempSecondNumber;
+        displayElement.textContent = calculate(operator);
+        firstNumber = displayElement.textContent;
+        secondNumber = "";
+        isCalculating = false;
+        equalsAgain = true;
+        calculated = true;
+    }
+    if (isCalculating) {
+        displayElement.textContent = calculate(operator);
+        firstNumber = displayElement.textContent;
+        tempSecondNumber = secondNumber;
+        secondNumber ="";
+        isCalculating = false;
+        equalsAgain = true;
+        calculated = true;
+    }   
+}
+
+function pressOperator(e) {
+    if (isCalculating) {
+        displayElement.textContent = calculate(operator);
+        firstNumber = displayElement.textContent;
+        secondNumber ="";
+        isCalculating = false;
+        operator = e.target.className.split(" ")[1];
+    } 
+    operator = e.target.className.split(" ")[1];
+    isCalculating = true;
+    equalsAgain = false;
+    calculated = false;
+}
+
+function pressNumber(e) {
+    if (calculated) {
+        reset();
+    }
+    if (!isCalculating) {
+        firstNumber += e.target.textContent;
+        displayElement.textContent = firstNumber;
+    }
+    else {
+        secondNumber += e.target.textContent;
+        displayElement.textContent = secondNumber;
+    }
+}
+
+
+function reset() {
+    firstNumber = "";
+    secondNumber = "";
+
+    isFirstNumber = true;
+    isCalculating = false;
+
+    operator = "";
+    displayElement.textContent ="";
+    equalsAgain = false;
+    calculated = false;
+
+}
 
 function calculate(operator) {
     if (operator.includes("add")) {
