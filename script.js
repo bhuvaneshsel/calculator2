@@ -45,6 +45,7 @@ function reset() {
     calculated = false;
 
 }
+
 clearElement.addEventListener("click", (e) => {
    reset()
 })
@@ -110,7 +111,7 @@ container.addEventListener("click", (e) => {
             equalsAgain = true;
             calculated = true;
         }
-        if (isCalculating || !equalsAgain) {
+        if (isCalculating) {
             displayElement.textContent = calculate(operator);
             firstNumber = displayElement.textContent;
             tempSecondNumber = secondNumber;
