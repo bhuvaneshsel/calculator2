@@ -24,6 +24,16 @@ clearElement.addEventListener("click", (e) => {
     displayElement.textContent ="";
 })
 
+percentageElement.addEventListener("click", (e) => {
+    if (!isCalculating) {
+        firstNumber = firstNumber/100;
+        displayElement.textContent = firstNumber;
+    }
+    else {
+        secondNumber = secondNumber/100;
+        displayElement.textContent = secondNumber;
+    }
+})
 
 
 container.addEventListener("click", (e) => {
