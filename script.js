@@ -1,5 +1,9 @@
 let container = document.querySelector(".container");
 let displayElement = document.querySelector(".display")
+let clearElement = document.querySelector(".AC");
+let percentageElement = document.querySelector(".percentage");
+
+
 
 let firstNumber = "";
 let secondNumber = "";
@@ -9,7 +13,16 @@ let isCalculating = false;
 
 let operator = "";
 
+clearElement.addEventListener("click", (e) => {
+    firstNumber = "";
+    secondNumber = "";
 
+    isFirstNumber = true;
+    isCalculating = false;
+
+    operator = "";
+    displayElement.textContent ="";
+})
 
 
 
