@@ -2,6 +2,7 @@ let container = document.querySelector(".container");
 let displayElement = document.querySelector(".display")
 let clearElement = document.querySelector(".AC");
 let percentageElement = document.querySelector(".percentage");
+let negationElement = document.querySelector(".negation");
 
 
 
@@ -24,6 +25,7 @@ clearElement.addEventListener("click", (e) => {
 
     operator = "";
     displayElement.textContent ="";
+    equalsAgain = false;
 })
 
 percentageElement.addEventListener("click", (e) => {
@@ -33,6 +35,17 @@ percentageElement.addEventListener("click", (e) => {
     }
     else {
         secondNumber = secondNumber/100;
+        displayElement.textContent = secondNumber;
+    }
+})
+
+negationElement.addEventListener("click", () => {
+    if (!isCalculating) {
+        firstNumber = -(+firstNumber);
+        displayElement.textContent = firstNumber;
+    }
+    else {
+        secondNumber = -(+secondNumber);
         displayElement.textContent = secondNumber;
     }
 })
