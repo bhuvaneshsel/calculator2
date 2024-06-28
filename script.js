@@ -147,7 +147,14 @@ function subtract() {
 }
 
 function divide() {
-    return firstNumber / secondNumber;
+    let quotient = firstNumber / secondNumber;
+    if (!quotient.toString().includes(".")) {
+        return quotient;
+    }
+    if (quotient.toString().split(".")[1].length > 3) {
+        return quotient.toFixed(3);
+    }
+    return quotient;
 }
 
 function multiply() {
