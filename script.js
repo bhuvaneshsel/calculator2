@@ -15,28 +15,28 @@ let operator = "";
 
 container.addEventListener("click", (e) => {
     if (e.target.className.includes("number")) {
-        if (isFirstNumber === true) {
+        if (!isCalculating) {
             firstNumber += e.target.textContent;
             displayElement.textContent = firstNumber;
         }
         else {
             secondNumber += e.target.textContent;
             displayElement.textContent = secondNumber;
-            isCalculating = true;
-        }
-        
-    }
-    if (e.target.className.includes("equals")) {
-        if (isCalculating) {
-            console.log(operator);
-            displayElement.textContent = calculate(operator);
         }
     }
     if (e.target.className.includes("operation") && !e.target.className.includes("equals")) {
         operator = e.target.className.split(" ")[1];
-        console.log(operator);
-        isFirstNumber = false;
+        isCalculating = true;
     }
+    if (e.target.className.includes("equals")) {
+        if (isCalculating) {
+            displayElement.textContent = calculate(operator);
+            firstNumber = displayElement.textContent;
+            secondNumber ="";
+            isCalculating = false;
+        }   
+    }
+   
 })
 
 function calculate(operator) {
@@ -58,7 +58,7 @@ function add() {
     return +firstNumber + +secondNumber;
 }
 
-function subtact() {
+function subtract() {
     return firstNumber - secondNumber;
 }
 

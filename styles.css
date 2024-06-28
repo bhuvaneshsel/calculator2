@@ -52,6 +52,14 @@ button {
     background-color: rgb(34, 34, 34);
 }
 
+button:hover {
+    opacity: 0.8;
+}
+
+button:active {
+    opacity: 0.5;
+}
+
 .zero {
     flex: 2;
     border-radius: 1000px;
