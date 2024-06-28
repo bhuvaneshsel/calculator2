@@ -25,6 +25,13 @@ container.addEventListener("click", (e) => {
         }
     }
     if (e.target.className.includes("operation") && !e.target.className.includes("equals")) {
+        if (isCalculating) {
+            displayElement.textContent = calculate(operator);
+            firstNumber = displayElement.textContent;
+            secondNumber ="";
+            isCalculating = false;
+            operator = e.target.className.split(" ")[1];
+        } 
         operator = e.target.className.split(" ")[1];
         isCalculating = true;
     }
