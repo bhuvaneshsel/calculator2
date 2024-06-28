@@ -16,6 +16,8 @@ let isCalculating = false;
 let operator = "";
 let equalsAgain = false;
 
+let calculated = false;
+
 decimalElement.addEventListener("click", (e) => {
     if (!displayElement.textContent.includes(".")) {
         if (!isCalculating) {
@@ -29,7 +31,8 @@ decimalElement.addEventListener("click", (e) => {
     }
 })
 
-clearElement.addEventListener("click", (e) => {
+
+function reset() {
     firstNumber = "";
     secondNumber = "";
 
@@ -39,6 +42,11 @@ clearElement.addEventListener("click", (e) => {
     operator = "";
     displayElement.textContent ="";
     equalsAgain = false;
+    calculated = false;
+
+}
+clearElement.addEventListener("click", (e) => {
+   reset()
 })
 
 percentageElement.addEventListener("click", (e) => {
@@ -66,6 +74,9 @@ negationElement.addEventListener("click", () => {
 
 container.addEventListener("click", (e) => {
     if (e.target.className.includes("number")) {
+        if (calculated) {
+            reset();
+        }
         if (!isCalculating) {
             firstNumber += e.target.textContent;
             displayElement.textContent = firstNumber;
@@ -86,6 +97,7 @@ container.addEventListener("click", (e) => {
         operator = e.target.className.split(" ")[1];
         isCalculating = true;
         equalsAgain = false;
+        calculated = false;
     }
     if (e.target.className.includes("equals")) {
         if (equalsAgain) {
@@ -96,6 +108,7 @@ container.addEventListener("click", (e) => {
             secondNumber = "";
             isCalculating = false;
             equalsAgain = true;
+            calculated = true;
         }
         if (isCalculating || !equalsAgain) {
             displayElement.textContent = calculate(operator);
@@ -104,6 +117,7 @@ container.addEventListener("click", (e) => {
             secondNumber ="";
             isCalculating = false;
             equalsAgain = true;
+            calculated = true;
         }   
     }
    
